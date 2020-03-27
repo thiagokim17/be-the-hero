@@ -3,7 +3,8 @@ const connection = require('../database/connection')
 module.exports = {
     async index(request, response) {
         const { page = 1 } = request.query;
-
+        
+        console.log(request.query);
         const [count] = await connection('incidents').count();
 
         const incidents = await connection('incidents')
@@ -19,7 +20,7 @@ module.exports = {
             ]);
 
         response.header('X-Total-Count', count['count(*)'])
-        return response.json({ incidents });
+        return response.json( incidents );
     },
     async create(request, response) {
 
